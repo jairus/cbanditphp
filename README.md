@@ -8,14 +8,14 @@ Common Bandit. Utility functions.
 composer require nmg/cbanditphp
 ```
 
-## Using GlobalClass
+## Using GlobalClass method
 
 ```php
 $g = new nmg\CBandit\GlobalClass();
 $g->nfo();
 ```
 
-## using a simple functions in src/CBandit/functions_helper.php
+## Using a simple function from src/CBandit/functions_helper.php
 
 ```php
 nfo();
