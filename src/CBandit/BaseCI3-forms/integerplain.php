@@ -1,0 +1,27 @@
+<?php
+//usage
+/*
+	$this->load->view("app/content/forms/integerplain", [
+		"label"=>"Integer", 
+		"name"=>"integer", 
+		"required"=>0, 
+		"placeholder"=>"", 
+		"datainitvalue"=>"", 
+		"class"=>"", 
+		"extratags"=>""
+	]);
+*/
+?>
+<div class="form-group x-form-group" style="margin:0px; padding:0px;">
+	<input data-formtype="basic" autocomplete="off" type="number" data-parsley-trigger="keyup" data-parsley-type="integer" class="form-control x-form <?php 
+		echo $name." x-form-".$name." "; 
+		echo (($class)? $class: "")."\" ";  
+		echo (($name)? "name='".$name."'": "")." ";
+		echo (($name)? "data-name='".$name."'": "")." ";
+		echo (($extratags)? $extratags : "")." ";
+		echo (($placeholder)? "placeholder='".$placeholder."'": "")." ";
+		echo (($required)? "required": "")." ";
+		echo (($datainitvalue!="")? "value='".$datainitvalue."'": "")." ";
+		echo (($datainitvalue!="")? "data-initvalue='".$datainitvalue."'": "")." ";
+	?>>
+</div>
