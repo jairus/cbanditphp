@@ -2,7 +2,6 @@
 /*
 	SET OF USEFUL FUNCTIONS FOR BASE
 */
-
 //short version of phpinfo();
 function nfo(){
 	phpinfo();
@@ -578,12 +577,16 @@ function arrayToXml($data, &$xmlData, $parent_key="") {
 	}
 }
 
-function array_is_list(array $arr){
-	if ($arr === []) {
-		return true;
+//to check if array_is_list
+if (!function_exists('array_is_list')) {
+	function array_is_list(array $arr){
+		if ($arr === []) {
+			return true;
+		}
+		return array_keys($arr) === range(0, count($arr) - 1);
 	}
-	return array_keys($arr) === range(0, count($arr) - 1);
 }
+
 
 /************************* FUNCTIONS USING CODE IGNITER 3 INSTANCE FOR BASE **************************/
 
