@@ -1,6 +1,8 @@
 {
     "name": "nmg/cbanditphp",
     "description": "Common Bandit. Utility functions",
+	"type": "library",
+    "license": "LGPL-2.1-or-later",
     "require": {
         "php": "^7.4 || ^8.0"
     },
