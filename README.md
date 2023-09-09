@@ -12,7 +12,9 @@ composer require jairus/cbanditphp
 
 ```php
 use jairus\CBandit\Helpers;
+
 $helpers = new Helpers();
+
 helpers->nfo();
 ```
 
