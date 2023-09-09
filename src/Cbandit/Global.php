@@ -1,11 +1,10 @@
 <?php
 namespace nmg\CBandit;
 
-class Helpers {
+class Global {
 	public function nfo(){
 		phpinfo();
 	}
-
 }
 
 ?>

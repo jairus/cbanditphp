@@ -9,6 +9,7 @@
 	"autoload": {
         "psr-4": {
             "nmg\\CBandit\\": "src/CBandit"
-        }
+        },
+		"files": ["src/CBandit/functions_helper.php"]
     }
 }
