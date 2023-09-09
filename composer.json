@@ -3,9 +3,8 @@
     "description": "Common Bandit. Utility functions",
 	"type": "library",
     "license": "LGPL-2.1-or-later",
-	"minimum-stability": "dev",
     "require": {
-        "php": "^7.4 || ^8.0"
+        "php": "^7.4 || ^8.0",
     },
 	"autoload": {
         "psr-4": {
