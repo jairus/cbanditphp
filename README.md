@@ -1,10 +1,10 @@
-# cbandit
+# CBandit
 
-Common Bandit. Utility functions. Global
+Common Bandit. Utility functions.
 
 ## Installation
 
-```javascript
+```bash
 npm install cbandit
 ```
 
