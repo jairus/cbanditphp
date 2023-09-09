@@ -13,7 +13,7 @@ class BaseCI3 {
 			"extratags"=>""
 		]);
 	*/
-	public static function loadForm($formfilename, $args, $ret = false){		
+	public static function loadForm($formfilename, $args, $ret = false){
 		$formfilename = str_replace("../", "", $formfilename); //mitigation
 		$formfilename = str_replace("./", "", $formfilename); //mitigation
 		$formfilename = trim($formfilename, "/");  //mitigation
