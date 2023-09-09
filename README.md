@@ -11,10 +11,7 @@ composer require nmg/cbanditphp
 ## Import
 
 ```php
-use jairus\CBandit\Helpers;
-
-$helpers = new Helpers();
-
+$helpers = new nmg\CBandit\Helpers();
 helpers->nfo();
 ```
 
