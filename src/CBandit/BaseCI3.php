@@ -23,12 +23,12 @@ class BaseCI3 {
 		}
 		if(!$ret){
 			extract($args);
-			include_once($absfile);
+			include($absfile);
 		}
 		else{
 			ob_start();
 			extract($args);
-			include_once($absfile);
+			include($absfile);
 			$output = ob_get_clean();
 			return $output;
 		}
