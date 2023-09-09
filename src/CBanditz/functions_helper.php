@@ -1,5 +1,5 @@
 <?php
-/*
+/* 
 	SET OF USEFUL FUNCTIONS FOR BASE
 */
 //short version of phpinfo();
