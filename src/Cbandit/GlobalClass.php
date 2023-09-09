@@ -1,7 +1,7 @@
 <?php
 namespace nmg\CBandit;
 
-class Global {
+class GlobalClass {
 	public function nfo(){
 		phpinfo();
 	}
