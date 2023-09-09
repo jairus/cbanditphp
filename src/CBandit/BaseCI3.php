@@ -13,13 +13,25 @@ class BaseCI3 {
 			"extratags"=>""
 		]);
 	*/
-	public static function loadForm($formfilename, $args){		
+	public static function loadForm($formfilename, $args, $ret = false){		
+		$formfilename = str_replace("../", "", $formfilename); //mitigation
+		$formfilename = str_replace("./", "", $formfilename); //mitigation
+		$formfilename = trim($formfilename, "/");  //mitigation
 		$absfile = dirname(__FILE__)."/BaseCI3-forms/".$formfilename;
 		if (pathinfo($formfilename, PATHINFO_EXTENSION) !== "php") {
 			$absfile .= ".php";
 		}
-		extract($args);
-		include_once($absfile);
+		if(!$ret){
+			extract($args);
+			include_once($absfile);
+		}
+		else{
+			ob_start();
+			extract($args);
+			include_once($absfile);
+			$output = ob_get_clean();
+			return $output;
+		}
 	}
 }
 
