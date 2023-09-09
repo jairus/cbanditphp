@@ -2,13 +2,24 @@
 namespace nmg\CBandit;
 
 class BaseCI3 {
-	public function loadForm($formfilename, $args){
-		$ci = get_instance();
+	/* 
+		nmg\CBandit\BaseCI3::loadForm("input", [
+			"label"=>"Name", 
+			"name"=>"name", 
+			"required"=>0, 
+			"placeholder"=>"", 
+			"datainitvalue"=>"", 
+			"class"=>"", 
+			"extratags"=>""
+		]);
+	*/
+	public static function loadForm($formfilename, $args){		
 		$absfile = dirname(__FILE__)."/BaseCI3-forms/".$formfilename;
 		if (pathinfo($formfilename, PATHINFO_EXTENSION) !== "php") {
 			$absfile .= ".php";
 		}
-		$ci->load->view($absfile, $args);
+		extract($args);
+		include_once($absfile);
 	}
 }
 
