@@ -1,7 +1,7 @@
 <?php
 //usage
 /*
-	$this->load->view("app/content/forms/textarea", [
+	nmg\CBandit\BaseCI3::loadForm("app/content/forms/textarea", [
 		"label"=>"Text Area", 
 		"name"=>"textarea", 
 		"required"=>0, 

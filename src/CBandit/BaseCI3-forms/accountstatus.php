@@ -1,7 +1,7 @@
 <?php
 //usage
 /*
-	$this->load->view("app/content/forms/accountstatus", [
+	nmg\CBandit\BaseCI3::loadForm("app/content/forms/accountstatus", [
 		"label"=>"Account Status", 
 		"name"=>"accountstatus", 
 		"required"=>0, 

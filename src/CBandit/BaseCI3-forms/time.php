@@ -1,7 +1,7 @@
 <?php
 //usage
 /*
-	$this->load->view("app/content/forms/time", [
+	nmg\CBandit\BaseCI3::loadForm("app/content/forms/time", [
 		"label"=>"Time", 
 		"name"=>"time", 
 		"required"=>0, 

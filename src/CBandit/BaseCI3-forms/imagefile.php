@@ -1,7 +1,7 @@
 <?php
 //usage
 /*
-	$this->load->view("app/content/forms/imagefile", [
+	nmg\CBandit\BaseCI3::loadForm("app/content/forms/imagefile", [
 		"label"=>"Image File", 
 		"name"=>"imagefile", 
 		"dataimgwidth"=>"300", 

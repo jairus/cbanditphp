@@ -1,6 +1,6 @@
 <?php
 /*
-$this->load->view("app/content/forms/map", [
+nmg\CBandit\BaseCI3::loadForm("app/content/forms/map", [
 	"label" => "Drag Map to Pin Location",
 	"name"=>"latlong", 
 	"required"=>1, 

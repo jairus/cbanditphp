@@ -1,7 +1,7 @@
 <?php
 //usage
 /*
-	$this->load->view("app/content/forms/pesoplain", [
+	nmg\CBandit\BaseCI3::loadForm("app/content/forms/pesoplain", [
 		"name"=>"number", 
 		"required"=>0, 
 		"placeholder"=>"", 

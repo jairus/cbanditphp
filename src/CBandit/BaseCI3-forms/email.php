@@ -1,7 +1,7 @@
 <?php
 //usage
 /*
-	$this->load->view("app/content/forms/input", ["label"=>"Input", "name"=>"input", "required"=>1, "placeholder"=>"", "value"=>"", "class"=>"", "extratags"=>""]);
+	nmg\CBandit\BaseCI3::loadForm("app/content/forms/input", ["label"=>"Input", "name"=>"input", "required"=>1, "placeholder"=>"", "value"=>"", "class"=>"", "extratags"=>""]);
 */
 ?>
 <div class="form-group x-form-group">

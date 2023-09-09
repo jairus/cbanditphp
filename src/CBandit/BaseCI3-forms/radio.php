@@ -12,7 +12,7 @@
 	$s['value'] = "No";
 	$s['extratags'] = "";
 	$selections[] = $s;
-	$this->load->view("app/content/forms/radio", ["label"=>"Display", "name"=>"display", "required"=>0, "datatable"=>"", "datainitvalue"=>"", "dataendpoint"=>"", "class"=>"", "selections"=>$selections, "extratags"=>""]);
+	nmg\CBandit\BaseCI3::loadForm("app/content/forms/radio", ["label"=>"Display", "name"=>"display", "required"=>0, "datatable"=>"", "datainitvalue"=>"", "dataendpoint"=>"", "class"=>"", "selections"=>$selections, "extratags"=>""]);
 */
 ?>
 <div class="form-group x-form-group">

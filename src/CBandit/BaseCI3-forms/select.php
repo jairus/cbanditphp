@@ -1,7 +1,7 @@
 <?php
 //usage
 /*
-	$this->load->view("app/content/forms/select", ["label"=>"Select", "name"=>"", "required"=>0, "class"=>"", "html"=>"", "extratags"=>""]);
+	nmg\CBandit\BaseCI3::loadForm("app/content/forms/select", ["label"=>"Select", "name"=>"", "required"=>0, "class"=>"", "html"=>"", "extratags"=>""]);
 */
 ?>
 <div class="form-group x-form-group">

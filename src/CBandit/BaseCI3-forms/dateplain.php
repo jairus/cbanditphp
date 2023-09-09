@@ -1,7 +1,7 @@
 <?php
 //usage
 /*
-	$this->load->view("app/content/forms/dateplain", [
+	nmg\CBandit\BaseCI3::loadForm("app/content/forms/dateplain", [
 		"name"=>"date", 
 		"required"=>0, 
 		"placeholder"=>"YYYY-MM-DD", 

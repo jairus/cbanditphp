@@ -1,7 +1,7 @@
 <?php
 //usage
 /*
-	$this->load->view("app/content/forms/password", [
+	nmg\CBandit\BaseCI3::loadForm("app/content/forms/password", [
 		"label"=>"Password", 
 		"name"=>"password", 
 		"required"=>0, 

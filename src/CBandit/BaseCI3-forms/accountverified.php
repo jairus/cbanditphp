@@ -1,7 +1,7 @@
 <?php
 //usage
 /*
-	$this->load->view("app/content/forms/accountverified", [
+	nmg\CBandit\BaseCI3::loadForm("app/content/forms/accountverified", [
 		"label"=>"Account Verified", 
 		"name"=>"accountverified", 
 		"required"=>0, 

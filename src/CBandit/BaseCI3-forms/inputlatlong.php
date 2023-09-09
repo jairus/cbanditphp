@@ -1,7 +1,7 @@
 <?php
 //usage
 /*
-	$this->load->view("app/content/forms/inputlatlong", [
+	nmg\CBandit\BaseCI3::loadForm("app/content/forms/inputlatlong", [
 		"label"=>"Input", 
 		"name"=>"input", 
 		"required"=>1, 

@@ -1,7 +1,7 @@
 <?php
 //usage
 /*
-	$this->load->view("app/content/forms/wysywyg", [
+	nmg\CBandit\BaseCI3::loadForm("app/content/forms/wysywyg", [
 		"label"=>"Wysywyg", 
 		"name"=>"wysywyg",
 		"required"=>0, 

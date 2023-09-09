@@ -1,7 +1,7 @@
 <?php
 //usage
 /*
-	$this->load->view("app/content/forms/filemulti", [
+	nmg\CBandit\BaseCI3::loadForm("app/content/forms/filemulti", [
 		"label"=>"File Multi", 
 		"name"=>"filemulti", 
 		"required"=>0, 

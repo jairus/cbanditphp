@@ -1,7 +1,7 @@
 <?php
 //usage
 /*
-	$this->load->view("app/content/forms/dateclassic", ["label"=>"Date Classic", "name"=>"dateclassic", "required"=>0, "placeholder"=>"YYYY-MM-DD", "value"=>"", "class"=>"", "extratags"=>"");
+	nmg\CBandit\BaseCI3::loadForm("app/content/forms/dateclassic", ["label"=>"Date Classic", "name"=>"dateclassic", "required"=>0, "placeholder"=>"YYYY-MM-DD", "value"=>"", "class"=>"", "extratags"=>"");
 */
 ?>
 <div class="form-group x-form-group">

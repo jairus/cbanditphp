@@ -7,7 +7,7 @@
 	$radiooptions["3 - Average"] = 3;
 	$radiooptions["2 - Poor"] = 2;
 	$radiooptions["1 - Unacceptable"] = 1;
-	$this->load->view("app/content/forms/selectradio", [
+	nmg\CBandit\BaseCI3::loadForm("app/content/forms/selectradio", [
 		"label"=>"selectradio", 
 		"name"=>"selectradio", 
 		"required"=>0, 

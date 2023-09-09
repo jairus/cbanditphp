@@ -1,7 +1,7 @@
 <?php
 //usage
 /*
-	$this->load->view("app/content/forms/integer", [
+	nmg\CBandit\BaseCI3::loadForm("app/content/forms/integer", [
 		"label"=>"Integer", 
 		"name"=>"integer", 
 		"required"=>0, 

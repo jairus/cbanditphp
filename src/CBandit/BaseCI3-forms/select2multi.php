@@ -1,7 +1,7 @@
 <?php
 //usage
 /*
-	$this->load->view("app/content/forms/select2multi", [
+	nmg\CBandit\BaseCI3::loadForm("app/content/forms/select2multi", [
 		"label"=>"Select2 Multi", 
 		"name"=>"select2multi", 
 		"required"=>0, 

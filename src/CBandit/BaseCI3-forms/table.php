@@ -19,7 +19,7 @@
 	</style>
 	<div class="x-userstable-modal x-tableform-modal hide">
 		<?php
-		$this->load->view("app/content/forms/input", [
+		nmg\CBandit\BaseCI3::loadForm("app/content/forms/input", [
 			"label"=>"Email Login", 
 			"name"=>"username", 
 			"placeholder"=>"Email Login",
@@ -30,7 +30,7 @@
 		]);
 		?>
 		<?php
-		$this->load->view("app/content/forms/input", [
+		nmg\CBandit\BaseCI3::loadForm("app/content/forms/input", [
 			"label"=>"Name", 
 			"placeholder"=>"Name",
 			"name"=>"name", 
@@ -43,7 +43,7 @@
 	</div>
 	<!-- // PUT THIS OUTSIDE FORM -->
 	<?php
-	$this->load->view("app/content/forms/table", [
+	nmg\CBandit\BaseCI3::loadForm("app/content/forms/table", [
 		"name"=>"userstable", 
 		"modalcontainerclass"=>"x-userstable-modal",
 		"dataendpoint"=>site_url("api/table/users")."?status=Active", 
