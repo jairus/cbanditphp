@@ -5,7 +5,7 @@ Common Bandit. Utility functions.
 ## Installation
 
 ```bash
-composer require jairus/cbanditphp
+composer require nmg/cbanditphp
 ```
 
 ## Import
