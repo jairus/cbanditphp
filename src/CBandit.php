@@ -1,6 +1,6 @@
 <?php
 
-namespace jairus\CBandit;
+namespace nmg\CBandit;
 
 class Helpers {
 
