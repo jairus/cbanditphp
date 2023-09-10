@@ -57,7 +57,7 @@ User.isSuper = function(){
 	if(User.data['id']==1){
 		return true;
 	}
-	else if(User.hasPerm("immsadmin")){
+	else if(User.hasPerm("admin")){ //specific perm
 		return true;
 	}
 	return false;
