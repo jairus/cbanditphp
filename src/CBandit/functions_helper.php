@@ -1187,4 +1187,5 @@ function apiError($error=""){
 	exit();
 }
 
+setupUploadsFolder();
 ?>
