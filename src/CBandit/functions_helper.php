@@ -1186,6 +1186,4 @@ function apiError($error=""){
 	echo json_encode($ret);	
 	exit();
 }
-
-setupUploadsFolder();
 ?>
