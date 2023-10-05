@@ -1165,6 +1165,19 @@ function apiResponse($ret){
 	exit();
 }
 
+function validDate($date) {
+    $pattern = '/^\d{4}-\d{2}-\d{2}$/';
+    if (!preg_match($pattern, $date)) {
+        return false;
+    }
+    $dateParts = explode('-', $date);
+    // Check if the date is valid using checkdate function
+    $year = (int)$dateParts[0];
+    $month = (int)$dateParts[1];
+    $day = (int)$dateParts[2];
+    return checkdate($month, $day, $year);
+}
+
 //for api return handling
 function apiSuccess($data=[]){
 	$ci = get_instance(); // CI_Loader instance
