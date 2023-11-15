@@ -495,13 +495,13 @@ function echo_flush($str){
 function csvToArr($contents){
 	$lines = explode("\n", $contents);
 	if(isCLI()){
-		echo_flush("Coverting CSV to Array...\n");
+		//echo_flush("Coverting CSV to Array...\n");
 	}
 	if(is_array($lines)){
 		$t = count($lines);
 		foreach($lines as $key=>$line){
 			if(isCLI()){
-				echo_flush("Trim $key of $t\n");
+				//echo_flush("Trim $key of $t\n");
 			}
 			if(!trim($line)){
 			 unset($lines[$key]);
@@ -512,7 +512,7 @@ function csvToArr($contents){
 	
 	//get fields 
 	if(isCLI()){
-		echo_flush("Getting Fields...\n");
+		//echo_flush("Getting Fields...\n");
 	}
 	$fields = [];
 	$line = $lines[0];
@@ -535,7 +535,7 @@ function csvToArr($contents){
 		$dataline = [];
 		if(is_array($liner)){
 			if(isCLI()){
-				echo_flush("Align $key of $t\n");
+				//echo_flush("Align $key of $t\n");
 			}
 			foreach($liner as $index=>$linervalue){
 				$dataline[$fields[$index]] = trim($linervalue);
