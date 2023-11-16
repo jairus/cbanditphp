@@ -465,12 +465,45 @@ function nonNegative($n){
 
 function isCLI(){
 	if(
-		php_sapi_name()=="cli" 
-		|| !trim($_SERVER['HTTPS_HOST'])
+		php_sapi_name()=="cli"
 	){
 		return true;
 	}
 	return false;
+}
+
+function isHTTPS(){
+	$scheme = @json_decode($_SERVER['HTTP_CF_VISITOR'], true); //from cloudflare
+	return (
+		@strtolower($_SERVER['REQUEST_SCHEME'])=="https"
+		|| @strtolower($scheme['scheme'])=="https"||$_SERVER['HTTPS']=="on" //from cloudflare
+		|| @strtolower($_SERVER['HTTP_X_FORWARDED_PROTO'])=="https" //from cloudflare
+		|| @strtolower($_SERVER['HTTP_X_FORWARDED_PORT'])=="443" //from cloudfront try
+		|| $_SERVER['HTTP_X_HTTPS']=="yes"
+		|| $_SERVER['HTTPS']=="on"
+		|| $_SERVER['X-HTTPS']=="on"
+	);
+}
+
+function isLOCAL(){
+	return (strpos(strtolower($_SERVER['HTTP_HOST']), "local.nmgdev.com")!==false);
+}
+
+function isNMGDEV(){
+	return (strpos(strtolower($_SERVER['HTTP_HOST']), "nmgdev.com")!==false);
+}
+
+
+function getHost(){
+	$host = trim($_SERVER['HTTP_HOST']);
+	if(!$host && isset($_SERVER['SCRIPT_URI'])) { //if HTTP_HOST is not set get from SCRIPT_URI
+		$scriptUri = $_SERVER['SCRIPT_URI'];
+		$parsedUrl = parse_url($scriptUri);
+		if (isset($parsedUrl['host'])) {
+			$host = strtolower($parsedUrl['host']);
+		}
+	}
+	return $host;
 }
 
 //for php8 cli echo to flush right away
