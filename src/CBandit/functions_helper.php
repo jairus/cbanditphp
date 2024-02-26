@@ -1232,4 +1232,36 @@ function apiError($error=""){
 	echo json_encode($ret);	
 	exit();
 }
+
+function sanitizeHandle($input) {
+	// Remove any characters that are not alphanumeric or underscore
+	$cleaned = preg_replace('/[^a-zA-Z0-9_]/', '', $input);
+	// If the first character is a number, replace it with an underscore
+	if (isset($cleaned[0]) && is_numeric($cleaned[0])) {
+		$cleaned[0] = '_';
+	}
+	return $cleaned;
+}
+
+function isValidEmail($email) {
+    return filter_var($email, FILTER_VALIDATE_EMAIL) !== false;
+}
+
+function isValidPhilippineMobileNumber($phoneNumber) {
+    // Check if the phone number starts with 639 and has 11 digits
+    return preg_match('/^639\d{9}$/', $phoneNumber) === 1;
+}
+
+function validUsername($username){
+	$username = strtolower(trim($username));
+	if(!isValidEmail($username)){
+		$username = formatPHMobileNo($username); //probably a mobile number
+		if(!isValidPhilippineMobileNumber($username)){
+			return false;
+		}
+	}
+	return $username;
+}
+
+
 ?>
