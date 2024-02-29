@@ -1263,6 +1263,10 @@ function validUsername($username){
 	return $username;
 }
 
+function is_assoc($array) {
+    return array_keys($array) === range(0, count($array) - 1);
+}
+
 function json_print($data){
 	if (is_array($data) || is_object($data)) {
 		if(is_assoc($data)){
