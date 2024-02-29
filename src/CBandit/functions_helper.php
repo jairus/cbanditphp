@@ -1263,5 +1263,46 @@ function validUsername($username){
 	return $username;
 }
 
-
+function json_print($data){
+	if (is_array($data) || is_object($data)) {
+		if(is_assoc($data)){
+			echo_flush("[");
+			if(is_array($data)){
+				$count = count($data);
+				foreach($data as $key => $item){
+					json_print($item);
+					if($key+1<$count){
+						echo_flush(",");
+					}
+				}
+			}
+			echo_flush("]");
+		}
+		else{
+			echo_flush("{");
+			if(is_array($data)){
+				$keys = array_reverse(array_keys($data));
+				foreach($data as $key => $item){
+					echo_flush('"'.sanitize_for_json($key).'":');
+					json_print($item);
+					if($keys[0]!=$key){
+						echo_flush(",");
+					}
+				}
+			}
+			echo_flush("}");
+		}
+	}
+	else{
+		if(is_string($data)){
+			echo_flush('"'.sanitize_for_json($data).'"');
+		}
+		else if(is_bool($data)){
+			echo_flush(($data)? "true" : "false");
+		}
+		else{
+			echo_flush($data);
+		}
+	}
+}
 ?>
