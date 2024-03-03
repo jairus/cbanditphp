@@ -1194,7 +1194,7 @@ function apiResponse($ret){
 		$ret['data'] = $ret;
 	}
 	header('Content-Type: application/json');
-	echo json_encode($ret);	
+	json_print($ret);
 	exit();
 }
 
@@ -1218,7 +1218,7 @@ function apiSuccess($data=[]){
 	$ret['success'] = 1;
 	$ret['elapsed_time'] = $ci->benchmark->elapsed_time('start', 'end');
 	header('Content-Type: application/json');
-	echo json_encode($ret);	
+	json_print($ret);
 	exit();
 }
 
@@ -1229,7 +1229,7 @@ function apiError($error=""){
 	$ret['error'] = $error;
 	$ret['elapsed_time'] = $ci->benchmark->elapsed_time('start', 'end');
 	header('Content-Type: application/json');
-	echo json_encode($ret);	
+	json_print($ret);
 	exit();
 }
 
