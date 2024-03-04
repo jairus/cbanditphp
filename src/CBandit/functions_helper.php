@@ -1307,11 +1307,17 @@ function json_print($data){
 		if(is_string($data)){
 			echo_flush('"'.sanitize_for_json($data).'"');
 		}
+		else if(is_numeric($data)){
+			echo_flush($data);
+		}
 		else if(is_bool($data)){
 			echo_flush(($data)? "true" : "false");
 		}
 		else{
-			echo_flush($data);
+			if(!$data){
+				$data = "";
+			}
+			echo_flush('"'.sanitize_for_json($data).'"');
 		}
 	}
 }
