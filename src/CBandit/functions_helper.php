@@ -1186,18 +1186,6 @@ function generateCode($prefix="CO"){
 	return $code;
 }
 
-//for api return handling
-function apiResponse($ret){
-	$ci = get_instance(); // CI_Loader instance
-	$ret['elapsed_time'] = $ci->benchmark->elapsed_time('start', 'end');
-	if(!is_array($ret)){
-		$ret['data'] = $ret;
-	}
-	header('Content-Type: application/json');
-	json_print($ret);
-	exit();
-}
-
 function validDate($date) {
     $pattern = '/^\d{4}-\d{2}-\d{2}$/';
     if (!preg_match($pattern, $date)) {
@@ -1211,7 +1199,65 @@ function validDate($date) {
     return checkdate($month, $day, $year);
 }
 
+//for api Bearer Auth
+function apiBearerAuth($authtoken) {
+	$ci = get_instance(); // CI_Loader instance
+	// Check if the Authorization header is set
+	if (!isset($_SERVER['HTTP_AUTHORIZATION'])) {
+		// Handle the case where Authorization header is not set
+		// You may want to send a 401 Unauthorized response
+		// or redirect the user to a login page
+		$ci->output->set_status_header(401);
+		echo 'Unauthorized';
+		exit;
+	}
+	// Get the Authorization header
+	$authHeader = $_SERVER['HTTP_AUTHORIZATION'];
+	// Check if the header starts with "Bearer"
+	if (strpos($authHeader, 'Bearer ') !== 0) {
+		// Handle the case where the header doesn't start with "Bearer"
+		// You may want to send a 401 Unauthorized response
+		// or redirect the user to a login page
+		$ci->output->set_status_header(401);
+		echo 'Unauthorized';
+		exit;
+	}
+	// Extract the token from the Authorization header
+	$token = substr($authHeader, 7);
+	return $authtoken == $token;
+}
+
+//for endpoint initialization and getting args
+function apiInit(){
+	$ci = get_instance(); // CI_Loader instance
+	$ci->benchmark->mark('start');
+	$args = $_REQUEST;
+	//if no request data get from raw input stream 
+	if(!count(array_keys($args))){
+		// Get the raw input stream
+		$rawData = $ci->input->raw_input_stream;
+		// Decode the raw input if it's JSON
+		$decodedData = @json_decode($rawData, true);
+		if(is_array($decodedData)){
+			$args = $decodedData;
+		}
+	}
+	return $args;
+}
+
 //for api return handling
+function apiResponse($ret){
+	$ci = get_instance(); // CI_Loader instance
+	$ret['elapsed_time'] = $ci->benchmark->elapsed_time('start', 'end');
+	if(!is_array($ret)){
+		$ret['data'] = $ret;
+	}
+	header('Content-Type: application/json');
+	json_print($ret);
+	exit();
+}
+
+//for api success return handling
 function apiSuccess($data=[]){
 	$ci = get_instance(); // CI_Loader instance
 	$ret['data'] = $data;
@@ -1222,7 +1268,7 @@ function apiSuccess($data=[]){
 	exit();
 }
 
-//for api return handling
+//for api error return handling
 function apiError($error=""){
 	$ci = get_instance(); // CI_Loader instance
 	$ret = [];
@@ -1232,6 +1278,7 @@ function apiError($error=""){
 	json_print($ret);
 	exit();
 }
+
 
 function sanitizeHandle($input) {
 	// Remove any characters that are not alphanumeric or underscore
