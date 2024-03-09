@@ -1199,6 +1199,25 @@ function validDate($date) {
     return checkdate($month, $day, $year);
 }
 
+//for api to get Bearer Auth Token
+function apiBearerToken() {
+	$ci = get_instance(); // CI_Loader instance
+	// Check if the Authorization header is set
+	if (!isset($_SERVER['HTTP_AUTHORIZATION'])) {
+		return "";
+	}
+	// Get the Authorization header
+	$authHeader = $_SERVER['HTTP_AUTHORIZATION'];
+	// Check if the header starts with "Bearer"
+	if (strpos($authHeader, 'Bearer ') !== 0) {
+		return "";
+	}
+	// Extract the token from the Authorization header
+	$token = substr($authHeader, 7);
+	return $token;
+}
+
+
 //for api Bearer Auth
 function apiBearerAuth($authtoken) {
 	$ci = get_instance(); // CI_Loader instance
