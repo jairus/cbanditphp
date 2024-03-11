@@ -1336,6 +1336,8 @@ function is_assoc($array) {
 function sanitize_for_json($value){
 	$value = str_replace('\\', '\\\\', $value);
 	$value = str_replace('"', '\"', $value);
+	$value = str_replace("\r\n", "\\r\\n", $value);
+	$value = str_replace("\n", "\\n", $value);
 	return $value;
 }
 
