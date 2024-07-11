@@ -299,6 +299,7 @@ Global.alert = function(message){
 Global.parse = function(json){
 	var obj = {};
 	try{
+		json = json.replace(/&/g, '\\u0026');
 		obj = JSON.parse(json);
 	}
 	catch(e){
