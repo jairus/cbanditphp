@@ -813,6 +813,37 @@ GlobalUI.fileUploadEvents = function(parentElem, callback){
 		}.bind({formObj:formObj}), 100);
 		callback(formObj);
 	})	
+
+	//peso
+	parentElem.find("[data-formtype='peso']").each(function(){
+		var formObj = $(this);
+		var formGroupElem = formObj.parents(".x-form-group");
+		
+		/********** events **********/
+		
+		formObj.off("blur").on("blur", function(e, initialize){
+			var obj = $(this);
+			var val = parseFloat(obj.val()); // Convert the value to a float
+			if (!isNaN(val)) {
+				// If the value is a valid number, format it to 2 decimal places
+				obj.val(val.toFixed(2));
+			}
+			else {
+				// Handle cases where the value is not a number
+				obj.val(''); // Optional: Clear the value if it's not a valid number
+			}
+		});
+		
+		/****** implementation ******/
+		
+		
+		//100ms delay
+		setTimeout(function(){
+			var formObj = this.formObj;
+			formObj.trigger("x-form-init");
+		}.bind({formObj:formObj}), 100);
+		callback(formObj);
+	})	
 	
 	
 	//for image upload populate
