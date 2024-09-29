@@ -364,6 +364,131 @@ GlobalUI.select2init = function(parentObj, elem, initcallback){
 			var successFunc = function(elem, result){
 				elem.html("");
 				var name = elem.attr("name");
+
+				if(elem.attr("data-sexy")){ //new implementation of select2
+					var obj = elem;
+					/********** events **********/
+
+					/* if(!obj.attr("x-form-change-hasit")){
+						//obj.attr("x-form-change-hasit", true)
+						obj.on("change", function(e, initialize){
+							var obj = $(this);
+							obj.trigger("x-form-change");
+						});
+					} */
+					
+					if(!obj.attr("x-form-change-hasit")){
+						obj.attr("x-form-change-hasit", true)
+						obj.on("select2:select", function(e, initialize){
+							var obj = $(this);
+							if(!Global.isset(e?.['params']?.['initialize'])){ //if not initialize
+								obj.trigger("x-form-change");
+							}
+							
+						});
+					}
+					
+					
+					//customAdapter
+					$.fn.select2.amd.define('select2/data/customAdapter',
+						[
+							'select2/data/array',
+							'select2/utils'
+						],
+						function (ArrayAdapter, Utils) {
+							function CustomDataAdapter ($element, options) {
+								CustomDataAdapter.__super__.constructor.call(this, $element, options);
+							}
+							Utils.Extend(CustomDataAdapter, ArrayAdapter);
+							CustomDataAdapter.prototype.query = function (params, callback) {
+								//Global.log(this.options.data);
+								//var items = this.options.data;
+								var items = this.$element.data("ajaxitems");
+								pageSize = 20;
+								if(!Global.isset(params.page)){
+									params.page = 1;
+								}
+								if(Global.isset(params.term)){
+									results = items.filter(function(item){
+										var params = this.params;
+										return item.text.toUpperCase().indexOf(params.term.toUpperCase()) >= 0;
+									}.bind({params:params}))
+								}
+								else{
+									results = items;
+								}
+								results =  results.slice((params.page - 1) * pageSize, params.page * pageSize)
+								var data = {};
+								data.results = results;
+								data.pagination = {};
+								if(results.length){
+									data.pagination.more = true;
+								}
+								else{
+									data.pagination.more = false;
+								}
+								//Global.log(params);
+								//Global.log(results);
+								//Global.log(items);
+								callback(data);
+							};
+							return CustomDataAdapter;
+						}
+					);
+					
+					/****** implementation ******/
+					
+					//prepare data
+					var data = result['data'];
+					for(var x in data){
+						//data[x]['text'] = (parseInt(x+1))+" "+data[x]['label'];
+						data[x]['id'] = data[x]['value'];
+						data[x]['text'] = data[x]['label'];
+					}
+					var items = Global.parse(Global.stringify(data));
+					if(!Global.isset(elem.attr("data-removeblank"))){
+						var blank = [{"id":"","text":"-"}];
+						items = blank.concat(items);
+					}
+					var loaderdiv = elem.parent().find(".x-selectionloading");
+					loaderdiv.addClass("hide");
+					obj.data("ajaxitems", items); //for later use
+					var customAdapter = $.fn.select2.amd.require('select2/data/customAdapter');
+					obj.select2({
+						data: items,
+						ajax: {},
+						dropdownParent: elem.parent(), //for modal display issue
+						dataAdapter: customAdapter
+					});
+					
+					if(Global.isset(obj.attr("data-initvalue"))){
+						obj.select2("trigger", "select", {
+							data: { id: obj.attr("data-initvalue") },
+							"initialize": true
+						});
+					}
+					
+					
+					//for parsley validation position
+					var span = obj.next();
+					span.insertBefore(obj);
+					setTimeout(function(){
+						var obj = this.obj;
+						var data = GlobalUI.getSelect2Data(obj, true);
+						if(Global.isset(data?.['id'])){
+							var json = Global.stringify(data);
+							obj.attr("data-raw", json);
+						}
+						else{
+							obj.attr("data-raw", "{}");
+						}
+						obj.trigger("x-form-init");
+						this.initcallback();
+					}.bind({obj:obj, initcallback:initcallback}), 100);
+					return false;
+				}
+
+
 				if(!Global.isset(elem.attr("data-removeblank"))){
 					var option = $("<option></option>");
 					option.val("");
@@ -510,6 +635,18 @@ GlobalUI.select2init = function(parentObj, elem, initcallback){
 get select2 data
 ******************/
 GlobalUI.getSelect2Data = function(select2obj, initialize){
+	if(select2obj.attr("data-sexy")){
+		if(select2obj.attr("multiple")){
+			var data = select2obj.select2('data');
+		}
+		else{
+			var data = select2obj.select2('data')?.[0];
+			if(!Global.isset(data)){
+				data = {};
+			}
+		}	
+		return data;
+	}
 	var value = select2obj.val();
 	if(Global.isset(initialize)){
 		value = select2obj.attr("data-initvalue");
@@ -3671,10 +3808,14 @@ GlobalUI.clone = function(args){
 	*/
 	//callbacks
 	var successcb = args['success'];
+	var postappendcb = args['postappend'];
 	var errorcb = args['error'];
 	var deletecb = args['delete'];
 	if(typeof successcb != "function"){
 		successcb = function(){};
+	}
+	if(typeof postappendcb != "function"){
+		postappendcb = function(){};
 	}
 	if(typeof errorcb != "function"){
 		errorcb = function(){};
@@ -3767,5 +3908,7 @@ GlobalUI.clone = function(args){
 	//append clone
 	successcb(cloneObj, parentObj, data);
 	parentObj.append(cloneObj);
+	postappendcb(cloneObj, parentObj, data);
+
 	
 }
