@@ -646,8 +646,13 @@ GlobalUI.getSelect2Data = function(select2obj, initialize){
 			var data = select2obj.select2('data');
 		}
 		else{
-			var data = select2obj.select2('data')?.[0];
-			if(!Global.isset(data)){
+			var data = {};
+			if (select2obj.hasClass('select2-hidden-accessible')) {
+				data = select2obj.select2('data')?.[0];
+				if (!Global.isset(data)) {
+					data = {};
+				}
+			} else {
 				data = {};
 			}
 		}	
