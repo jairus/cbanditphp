@@ -200,10 +200,13 @@ GlobalUI.populateSelect2 = function(elem, callback){
 	})
 	//console.log("select2obj.attr('data-name')", select2obj.attr('data-name'), select2obj.attr('data-select2-id'));
 	if(Global.isset(select2obj.attr('data-select2-id'))){
-		select2obj.on("change", function(e, initialize){
-			var obj = $(this);
-			obj.trigger("x-form-change");
-		});
+		if (!select2obj.data('change-bound')) {
+			select2obj.on("change", function(e, initialize){
+				var obj = $(this);
+				obj.trigger("x-form-change");
+			});
+		}
+		select2obj.data('change-bound', true); 
 		select2obj.removeClass("hide");
 		//for parsley validation position swap
 		var span = select2obj.next();
@@ -378,14 +381,17 @@ GlobalUI.select2init = function(parentObj, elem, initcallback){
 					} */
 					
 					if(!obj.attr("x-form-change-hasit")){
+						
 						obj.attr("x-form-change-hasit", true)
-						obj.on("select2:select", function(e, initialize){
-							var obj = $(this);
-							if(!Global.isset(e?.['params']?.['initialize'])){ //if not initialize
-								obj.trigger("x-form-change");
-							}
-							
-						});
+						if (!obj.data('change-bound')) {
+							obj.on("select2:select", function(e, initialize){
+								var obj = $(this);
+								if(!Global.isset(e?.['params']?.['initialize'])){ //if not initialize
+									obj.trigger("x-form-change");
+								}
+							});
+							obj.data('change-bound', true);
+						}
 					}
 					
 					
