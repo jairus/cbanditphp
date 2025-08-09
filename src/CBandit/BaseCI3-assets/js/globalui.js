@@ -1106,7 +1106,7 @@ GlobalUI.fillData = function(elem, filldata, callback){
 				}
 				//if image file type
 				else if(elem.find(".x-form-" + key).hasClass("x-fileuploadimgurl")){
-					if(Global.isset(val)){
+					if(Global.isset(val) && val!="-no file-"){
 						elem.find(".x-form-" + key).each(function(){
 							var obj = $(this);
 							var objContainer = obj.parents(".x-imagefileupload-container");
