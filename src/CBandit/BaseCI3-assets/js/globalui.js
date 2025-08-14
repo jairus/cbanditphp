@@ -3625,6 +3625,56 @@ GlobalUI.PageTable.populateContents = function(pageObj){
 						}, 1000)
 					});
 					
+					if(columnelem.hasClass("x-th-dateadded")){
+						columnelem.css("position", "relative")
+						var closebtn = $('<div><i class="fa fa-times" aria-hidden="true"></i></div>');
+						closebtn.addClass("hide");
+						closebtn.css("cursor", "pointer");
+						closebtn.css("background", "white");
+						closebtn.css("position", "absolute");
+						closebtn.css("right", "20px");
+						closebtn.css("top", "22px");
+						/************ events ************/
+						closebtn.off("click").on("click", function(e, initialize){
+							var obj = $(this);
+							var columnelem = $(obj.parents("th")[0]);
+							var headfilter = columnelem.find("input");
+							headfilter.val("");
+							headfilter.trigger("keyup");
+							obj.addClass("hide");
+						});
+						/******** implementation ********/
+						columnelem.append(closebtn);
+						headfilter.dateRangePicker({
+							//format: 'D MMMM YYYY',
+							format: 'YYYY-MM-DD',
+						}).on('datepicker-first-date-selected', function(event, obj){})
+						.on('datepicker-change', (event,obj) => {
+							var range = moment(obj.date1).format("YYYY-MM-DD")+" to "+moment(obj.date2).format("YYYY-MM-DD");
+							headfilter.val(range);
+							closebtn.removeClass("hide");
+						})
+						.on('datepicker-apply', (event,obj) => {
+							if(headfilter.val()){
+								clearInterval(pageObj.datepickerinterval)
+								pageObj.datepickerinterval = setTimeout(()=>{
+									headfilter.trigger("keyup");
+								}, 100)
+							}
+						})
+						.on('datepicker-close',function(){})
+						.on('datepicker-closed',function(){
+						})
+						.on('datepicker-open',function(){})
+						.on('datepicker-opened',function(){});
+						setTimeout(()=>{
+							if(headfilter.val()){
+								closebtn.removeClass("hide");
+							}
+						}, 200)
+						
+					}
+					
 					//footer filter
 					var footerfilter = $('<input type="text" placeholder="Filter" class="footerfilter form-control input-sm" />');
 					footerfilter.appendTo( $(column.footer()).empty() ) //filter on the footer
